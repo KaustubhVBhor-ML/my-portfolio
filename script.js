@@ -1,32 +1,51 @@
 /* ==========================================
-   MOBILE SIDEBAR
+   SIDEBAR OPEN / CLOSE
 ========================================== */
 
 const menuBtn = document.getElementById("menu-btn");
 const sidebar = document.getElementById("sidebar");
+const layout = document.querySelector(".container");
 
-if(menuBtn){
+if(menuBtn && sidebar && layout){
+
+    const syncMenuState = (isOpen) => {
+        const icon = menuBtn.querySelector(".sidebar-toggle-icon");
+
+        menuBtn.setAttribute("aria-expanded", String(isOpen));
+
+        if(icon){
+            icon.classList.toggle("is-open", isOpen);
+            icon.classList.toggle("is-closed", !isOpen);
+        }
+    };
 
     menuBtn.addEventListener("click", () => {
 
-        sidebar.classList.toggle("active");
-
-        const icon = menuBtn.querySelector("i");
-
-        if(sidebar.classList.contains("active")){
-
-            icon.classList.remove("fa-bars");
-            icon.classList.add("fa-xmark");
-
+        if(window.innerWidth <= 992){
+            sidebar.classList.toggle("active");
+            syncMenuState(sidebar.classList.contains("active"));
         }else{
-
-            icon.classList.remove("fa-xmark");
-            icon.classList.add("fa-bars");
-
+            layout.classList.toggle("sidebar-collapsed");
+            syncMenuState(!layout.classList.contains("sidebar-collapsed"));
         }
 
     });
 
+    window.addEventListener("resize", () => {
+        if(window.innerWidth > 992){
+            sidebar.classList.remove("active");
+            syncMenuState(!layout.classList.contains("sidebar-collapsed"));
+        }else{
+            // Mobile always uses the off-canvas sidebar state.
+            if(!layout.classList.contains("sidebar-collapsed")){
+                syncMenuState(sidebar.classList.contains("active"));
+            }else{
+                syncMenuState(false);
+            }
+        }
+    });
+
+    syncMenuState(true);
 }
 
 /* ==========================================
@@ -43,10 +62,14 @@ navLinks.forEach(link => {
 
             sidebar.classList.remove("active");
 
-            const icon = menuBtn.querySelector("i");
-
-            icon.classList.remove("fa-xmark");
-            icon.classList.add("fa-bars");
+            if(menuBtn){
+                const icon = menuBtn.querySelector(".sidebar-toggle-icon");
+                if(icon){
+                    icon.classList.remove("is-open");
+                    icon.classList.add("is-closed");
+                }
+                menuBtn.setAttribute("aria-expanded", "false");
+            }
 
         }
 
@@ -419,3 +442,53 @@ console.log(
 "%cKaustubh Bhor Portfolio Loaded 🚀",
 "color:#10B981;font-size:18px;font-weight:bold;" 
 );
+/* ==========================================
+   DARK MODE TOGGLE
+========================================== */
+
+const themeToggle = document.getElementById("theme-toggle");
+
+if(themeToggle){
+
+    const savedTheme = localStorage.getItem("portfolio-theme");
+
+    if(savedTheme === "dark"){
+        document.body.classList.add("dark-mode");
+    }
+
+    const updateThemeToggle = () => {
+
+        const icon = themeToggle.querySelector("i");
+        const label = themeToggle.querySelector("span");
+        const isDark = document.body.classList.contains("dark-mode");
+
+        if(isDark){
+            icon.classList.remove("fa-moon");
+            icon.classList.add("fa-sun");
+            label.textContent = "Light Mode";
+            themeToggle.setAttribute("aria-label", "Enable light mode");
+        }else{
+            icon.classList.remove("fa-sun");
+            icon.classList.add("fa-moon");
+            label.textContent = "Dark Mode";
+            themeToggle.setAttribute("aria-label", "Enable dark mode");
+        }
+
+    };
+
+    updateThemeToggle();
+
+    themeToggle.addEventListener("click", () => {
+
+        document.body.classList.toggle("dark-mode");
+
+        localStorage.setItem(
+            "portfolio-theme",
+            document.body.classList.contains("dark-mode") ? "dark" : "light"
+        );
+
+        updateThemeToggle();
+
+    });
+
+}

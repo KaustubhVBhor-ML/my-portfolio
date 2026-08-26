@@ -742,3 +742,9 @@ flex-wrap:wrap;
 }
 
 }
+@media(max-width:992px){
+    .theme-toggle{
+        margin-top:10px;
+        margin-bottom:20px;
+    }
+}

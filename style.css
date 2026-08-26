@@ -2725,3 +2725,315 @@ background:var(--red);
 color:white;
 
 }
+/* ==========================================
+   DARK MODE
+========================================== */
+
+:root{
+    --dark-bg:#0d0b14;
+    --dark-card:rgba(24,20,36,.88);
+    --dark-primary:#f7f2ff;
+    --dark-secondary:#c5b8d0;
+    --dark-border:rgba(236,72,153,.16);
+    --dark-shadow:0 20px 40px rgba(0,0,0,.30);
+}
+
+body.dark-mode{
+    --bg:var(--dark-bg);
+    --card:var(--dark-card);
+    --primary:var(--dark-primary);
+    --secondary:var(--dark-secondary);
+    --border:var(--dark-border);
+    --shadow:var(--dark-shadow);
+    background:var(--bg);
+    color:var(--primary);
+}
+
+body.dark-mode .sidebar{
+    background:rgba(17,14,25,.90);
+    border-right-color:rgba(236,72,153,.16);
+}
+
+body.dark-mode .glass-card,
+body.dark-mode .stat-card,
+body.dark-mode .skill-card,
+body.dark-mode .strength-card,
+body.dark-mode .project-showcase,
+body.dark-mode .timeline-card,
+body.dark-mode .contact-card,
+body.dark-mode .about-card,
+body.dark-mode .certificate-card{
+    background:rgba(24,20,36,.80);
+    border-color:rgba(236,72,153,.12);
+}
+
+body.dark-mode .nav-link{
+    color:#cfc4d8;
+}
+
+body.dark-mode .nav-link:hover,
+body.dark-mode .nav-link.active{
+    color:#ffffff;
+}
+
+body.dark-mode ::-webkit-scrollbar-track{
+    background:#171321;
+}
+
+body.dark-mode .logo-box span,
+body.dark-mode .certificate-content p,
+body.dark-mode .section-tag{
+    color:var(--dark-secondary);
+}
+
+.theme-toggle{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin:24px 0 22px;
+    padding:12px 14px;
+    border:1px solid rgba(124,58,237,.16);
+    border-radius:16px;
+    background:rgba(255,255,255,.55);
+    color:var(--primary);
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    transition:var(--transition);
+}
+
+.theme-toggle i{
+    font-size:15px;
+}
+
+.theme-toggle:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow);
+}
+
+body.dark-mode .theme-toggle{
+    background:rgba(255,255,255,.06);
+    border-color:rgba(255,255,255,.10);
+    color:#ffffff;
+}
+
+/* ==========================================
+   COMPACT CERTIFICATE LAYOUT
+========================================== */
+
+#certificates .certificate-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:22px;
+}
+
+#certificates .certificate-card{
+    min-width:0;
+    padding:22px;
+    border-radius:24px;
+    align-items:flex-start;
+    text-align:left;
+    display:flex;
+    flex-direction:column;
+}
+
+#certificates .view-certificate-btn{
+    width:100%;
+    margin:0 0 18px;
+    padding:12px 16px;
+    border-radius:14px;
+    font-size:14px;
+}
+
+#certificates .view-certificate-btn i{
+    font-size:17px;
+}
+
+#certificates .certificate-content{
+    padding:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+}
+
+#certificates .certificate-content .section-tag{
+    display:inline-block;
+    margin-bottom:9px;
+}
+
+#certificates .certificate-content h3{
+    font-size:20px;
+    line-height:1.35;
+    margin-bottom:10px;
+}
+
+#certificates .certificate-content p{
+    font-size:13px;
+    line-height:1.65;
+}
+
+@media(max-width:1100px){
+    #certificates .certificate-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+
+@media(max-width:760px){
+    #certificates .certificate-grid{
+        grid-template-columns:1fr;
+    }
+
+    #certificates .certificate-card{
+        padding:20px;
+    }
+}
+
+/* ==========================================
+   DARK MODE - HARD-CODED LIGHT ELEMENTS
+========================================== */
+
+body.dark-mode .nav-link:hover,
+body.dark-mode .social-links a,
+body.dark-mode #menu-btn,
+body.dark-mode .btn-secondary,
+body.dark-mode .image-card,
+body.dark-mode .stat-card,
+body.dark-mode .tech-track,
+body.dark-mode .info-box,
+body.dark-mode .footer-social a{
+    background:rgba(24,20,36,.88);
+    color:var(--dark-primary);
+}
+
+body.dark-mode .nav-link.active,
+body.dark-mode .nav-link:hover{
+    box-shadow:0 12px 30px rgba(0,0,0,.22);
+}
+
+/* ==========================================
+   SIDEBAR OPEN / CLOSE TOGGLE
+========================================== */
+
+#menu-btn{
+    position:fixed;
+    top:20px;
+    left:250px;
+    width:42px;
+    height:42px;
+    border:1px solid rgba(124,58,237,.14);
+    border-radius:10px;
+    background:rgba(255,255,255,.90);
+    color:var(--primary);
+    box-shadow:var(--shadow);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:1300;
+    cursor:pointer;
+    transition:left .35s ease, transform .25s ease, background .25s ease;
+    padding:0;
+}
+
+#menu-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* Matches the compact split-panel symbol shown in the reference image. */
+.sidebar-toggle-icon{
+    position:relative;
+    display:block;
+    width:18px;
+    height:15px;
+    border:1.8px solid currentColor;
+    border-radius:3px;
+    box-sizing:border-box;
+}
+
+.sidebar-toggle-icon::before{
+    content:"";
+    position:absolute;
+    top:-1.8px;
+    bottom:-1.8px;
+    width:1.8px;
+    background:currentColor;
+    border-radius:1px;
+    transition:left .25s ease;
+}
+
+.sidebar-toggle-icon.is-open::before{
+    left:5px;
+}
+
+.sidebar-toggle-icon.is-closed::before{
+    left:11px;
+}
+
+/* Fully hide the sidebar when closed and let content use the full width. */
+.container.sidebar-collapsed .sidebar{
+    width:0;
+    min-width:0;
+    padding:0;
+    border:0;
+    overflow:hidden;
+    opacity:0;
+    pointer-events:none;
+}
+
+.container.sidebar-collapsed .content{
+    margin-left:0;
+    width:100%;
+}
+
+body:has(.container.sidebar-collapsed) #menu-btn{
+    left:18px;
+}
+
+body.dark-mode #menu-btn{
+    background:rgba(24,20,36,.92);
+    color:#fff;
+    border-color:rgba(255,255,255,.10);
+}
+
+/* ==========================================
+   CERTIFICATE VIEW BUTTONS
+   Button appears directly after each summary.
+========================================== */
+
+#certificates .certificate-card .view-certificate-btn{
+    width:100%;
+    margin:16px 0 0;
+    padding:12px 14px;
+    min-height:48px;
+    font-size:14px;
+    flex-shrink:0;
+}
+
+#certificates .certificate-content{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+}
+
+#certificates .certificate-content .view-certificate-btn{
+    margin-top:auto;
+}
+
+@media(max-width:992px){
+    #menu-btn{
+        left:18px;
+    }
+
+    .container.sidebar-collapsed .content{
+        margin-left:0;
+    }
+
+    .container.sidebar-collapsed .sidebar{
+        width:0;
+        min-width:0;
+        padding:0;
+    }
+}
